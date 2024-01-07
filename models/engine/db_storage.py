@@ -1,4 +1,4 @@
-#/usr/bin/python3
+#!/usr/bin/python3
 """
 Contains the class DBStorage
 """
@@ -78,6 +78,10 @@ class DBStorage:
     def get(self, cls, id):
         """Retrieve one object based on the class and its ID"""
         return self.__session.query(cls).get(id)
+
+#    class DBStorage:
+#    # ... (other methods)
+
     def count(self, cls=None):
         """Count the number of objects in storage matching the given class"""
         if cls:
@@ -88,3 +92,4 @@ class DBStorage:
             for model_class in classes.values():
                 count += self.__session.query(model_class).count()
             return count
+
