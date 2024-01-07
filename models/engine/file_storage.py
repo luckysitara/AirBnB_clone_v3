@@ -1,4 +1,7 @@
 #!/usr/bin/python3
+import sys
+sys.path.append("/AirBnB_clone_v3")
+
 """
 Contains the FileStorage class
 """
