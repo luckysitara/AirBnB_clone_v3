@@ -76,20 +76,20 @@ class DBStorage:
         self.__session.remove()
 
     def get(self, cls, id):
-        """Retrieve one object based on the class and its ID"""
-        return self.__session.query(cls).get(id)
-
-#    class DBStorage:
-#    # ... (other methods)
+        """ Fetch a single object """
+        objs = self.__session.query(classes[cls.__name__]).get(id)
+        return objs
 
     def count(self, cls=None):
-        """Count the number of objects in storage matching the given class"""
-        if cls:
-            return self.__session.query(cls).count()
+        """ Returns a count of all objects in the database """
+        total = 0
+        if cls is None:
+            for clss in classes:
+                objs = self.__session.query(classes[clss]).all()
+                for obj in objs:
+                    total += 1
         else:
-            # Count all objects in storage
-            count = 0
-            for model_class in classes.values():
-                count += self.__session.query(model_class).count()
-            return count
-
+            objs = self.__session.query(cls).all()
+            for obj in objs:
+                total += 1
+        return total
